@@ -9,7 +9,7 @@ var identifierRe = "[a-zA-Z\\$_\u00a1-\uffff][a-zA-Z\\d\\$_\u00a1-\uffff]*";
 
 var JavaScriptHighlightRules = function(options) {
     // see: https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects
-    
+
     var keywords = {
         "variable.language":
             "Array|Boolean|Date|Function|Iterator|Number|Object|RegExp|String|Proxy|Symbol|"  + // Constructors
@@ -37,7 +37,14 @@ var JavaScriptHighlightRules = function(options) {
             "alert",
         "constant.language.boolean": "true|false"
     };
-    
+
+    if (options && options.noES6) {
+        keywords["storage.type"] = "var|function";
+        keywords["keyword"] = keywords["keyword"]
+            .replace("const|yield|import|get|set|async|await|", "")
+            .replace("class|enum|extends|super|export|implements|private|public|interface|package|protected|static|constructor", "")
+    }
+
     var keywordMapper = this.createKeywordMapper(keywords, "identifier");
 
     // keywords which can be followed by regular expressions
@@ -52,7 +59,7 @@ var JavaScriptHighlightRules = function(options) {
         ".)";
     // regexp must not have capturing parentheses. Use (?:) instead.
     // regexps are ordered -> the first match is used
-    
+
     var anonymousFunctionRe = "(function)(\\s*)(\\*?)";
 
     var functionCallStartRule = { //just simple function call

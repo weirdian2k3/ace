@@ -436,6 +436,14 @@ declare module "ace-code/src/mode/erlang" {
     export const Mode: new () => import("ace-code").Ace.SyntaxMode;
 }
 
+declare module "ace-code/src/mode/es5_highlight_rules" {
+    export const Es5HighlightRules: new () => import("ace-code").Ace.HighlightRules;
+}
+
+declare module "ace-code/src/mode/es5" {
+    export const Mode: new () => import("ace-code").Ace.SyntaxMode;
+}
+
 declare module "ace-code/src/mode/flix_highlight_rules" {
     export const FlixHighlightRules: new () => import("ace-code").Ace.HighlightRules;
 }
